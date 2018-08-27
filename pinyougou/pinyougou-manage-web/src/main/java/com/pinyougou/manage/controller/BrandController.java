@@ -25,6 +25,18 @@ public class BrandController {
 //    @ResponseBody
 //    @RequestMapping(value = "/findAll",method = RequestMethod.GET)
     public List<TbBrand> findAll(){
-        return brandService.queryAll();
+//        return brandService.queryAll();
+        return brandService.findAll();
+    }
+
+    /**
+     *  http://localhost:9100/brand/testPage.do?page=1&rows=5
+     *  分页查询
+     */
+    @GetMapping("/testPage")
+    public List<TbBrand> testPage(@RequestParam(value = "page",defaultValue = "1")Integer page,
+                                  @RequestParam(value = "rows",defaultValue = "5")Integer rows){
+//        return brandService.testPage(page,rows);
+        return (List<TbBrand>) brandService.findPage(page,rows).getRows();
     }
 }
